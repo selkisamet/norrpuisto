@@ -1,17 +1,25 @@
-import { Route, Routes } from "react-router-dom"
+import { Outlet, Route, Routes } from "react-router-dom"
 import LoadingScreenRouter from "./routers/LoadingScreen/LoadingScreen.Router"
-import HomeComponent from "./components/Home/Home.Component"
 import { createGlobalStyle } from "styled-components";
 import { Fragment } from "react";
+import HomeRouter from "./routers/Home/Home.Router";
 
 const App = () => {
   return (
     <Fragment>
       <GlobalStyle />
-      <Routes>
-        <Route path="/" element={<LoadingScreenRouter />} />
-        <Route path="/home" element={<HomeComponent />} />
-      </Routes>
+
+      <Fragment>
+        <Routes>
+          <Route path="/" element={<LoadingScreenRouter />} />
+          <Route path="/home" element={<HomeRouter />} />
+        </Routes>
+        <Outlet />
+      </Fragment>
+
+
+
+
     </Fragment>
   )
 }
@@ -28,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
   html{
     font-size: 10px;
     font-family: 'Roboto Mono', monospace;
+    font-weight: 400;
   }
 
   body{
@@ -38,3 +47,17 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 `;
+
+// const LayoutStyle = styled.div`
+//   display: grid;
+//   grid-template-columns: 21.2rem 1fr;
+//   background-color: blue;
+// `;
+
+// const SideMenuStyle = styled.div`
+//   background-color: red;
+//   width: 100%;
+//   height: 100vh;
+// `;
+
+// const BodyStyle = styled.div``;

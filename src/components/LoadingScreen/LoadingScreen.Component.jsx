@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContainerWrapper, TitleStyle, TextStyle, ImageStyle, FormStyle, ButtonStyle, InputStyle } from './LoadingScreen.Styles';
+import { ContainerWrapperStyle, TitleStyle, TextStyle, ImageStyle, FormStyle, ButtonStyle, InputStyle } from './LoadingScreen.Styles';
 import CardImage from '../../assets/images/darksurface-logo.svg';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -27,8 +27,9 @@ const LoadingScreenComponent = () => {
         }
     }
 
+
     return (
-        <ContainerWrapper>
+        <ContainerWrapperStyle>
 
             <ImageStyle src={CardImage} alt="" />
 
@@ -43,7 +44,7 @@ const LoadingScreenComponent = () => {
                 <ButtonStyle onClick={handleSubmit}>subscribe</ButtonStyle>
             </FormStyle>
 
-        </ContainerWrapper>
+        </ContainerWrapperStyle>
 
     )
 }
