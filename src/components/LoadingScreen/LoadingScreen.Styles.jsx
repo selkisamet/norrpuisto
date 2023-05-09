@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ContainerWrapper = styled.div`
+export const ContainerWrapperStyle = styled.div`
     color: #ffffff;
     background-color: #2D3545;
     height: 100vh;

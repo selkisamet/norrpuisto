@@ -1,8 +1,10 @@
-import React from 'react'
+import React from 'react';
+import { ContainerStyle } from "./Home.Styles";
 
 const HomeComponent = () => {
     return (
-        <div>Home Component</div>
+        <ContainerStyle>
+        </ContainerStyle>
     )
 }
 
