@@ -1,6 +1,6 @@
 import React from 'react'
-import HomeComponent from "../../components/Home/Home.Component"
 import SideMenuComponent from "../../components/SideMenu/SideMenu.Component"
+import HomeComponent from "../../components/Home/Home.Component"
 import LayoutComponent from "../../components/Template/Layout/Layout.Component"
 
 

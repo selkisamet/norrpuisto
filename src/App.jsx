@@ -1,8 +1,10 @@
 import { Outlet, Route, Routes } from "react-router-dom"
-import LoadingScreenRouter from "./routers/LoadingScreen/LoadingScreen.Router"
 import { createGlobalStyle } from "styled-components";
 import { Fragment } from "react";
+import LoadingScreenRouter from "./routers/LoadingScreen/LoadingScreen.Router"
 import HomeRouter from "./routers/Home/Home.Router";
+import CartRouter from "./routers/Cart/Cart.Router";
+import "./assets/css/icomoon-font-style.css";
 
 const App = () => {
   return (
@@ -13,12 +15,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LoadingScreenRouter />} />
           <Route path="/home" element={<HomeRouter />} />
+          <Route path="/cart" element={<CartRouter />} />
         </Routes>
         <Outlet />
       </Fragment>
-
-
-
 
     </Fragment>
   )
