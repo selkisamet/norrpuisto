@@ -1,10 +1,10 @@
 import React from 'react';
-import { ContainerStyle } from "./Home.Styles";
+import { ContainerWrapperStyle } from "./Home.Styles";
 
 const HomeComponent = () => {
     return (
-        <ContainerStyle>
-        </ContainerStyle>
+        <ContainerWrapperStyle>
+        </ContainerWrapperStyle>
     )
 }
 
