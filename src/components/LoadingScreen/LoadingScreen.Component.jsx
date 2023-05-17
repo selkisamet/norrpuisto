@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LoadingScreenComponent = () => {
     const [value, setValue] = useState();
+    const [greenButton, setGreenButton] = useState();
     const navigate = useNavigate();
     const code = "code2022";
 
@@ -20,7 +21,11 @@ const LoadingScreenComponent = () => {
         }
         else if (code === value) {
             console.log("Code Doğru.");
-            navigate("/home");
+            setGreenButton("#00C572");
+
+            setTimeout(() => {
+                navigate("/home");
+            }, 2000);
         }
         else {
             console.log("Code Doğru Değil.");
@@ -41,7 +46,7 @@ const LoadingScreenComponent = () => {
 
             <FormStyle>
                 <InputStyle type="text" placeholder="subscribe our newsletter_" onChange={handleOnChange} />
-                <ButtonStyle onClick={handleSubmit}>subscribe</ButtonStyle>
+                <ButtonStyle greenButton={greenButton} onClick={handleSubmit}>subscribe</ButtonStyle>
             </FormStyle>
 
         </ContainerWrapperStyle>

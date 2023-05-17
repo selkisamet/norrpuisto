@@ -56,6 +56,9 @@ export const ButtonStyle = styled.button`
     border: solid 0.1rem transparent;
     cursor: pointer;
     transition: all 0.2s ease;
+    /* background-color: #FFEDDB; */
+    color: ${(props) => props.greenButton ? "#ffffff" : ""};
+    background-color: ${(props) => props.greenButton ? "#00C572" : "#FFEDDB"};
     
 
     &:hover{

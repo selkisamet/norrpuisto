@@ -115,15 +115,6 @@ export const ProductImageStyle = styled.img`
     border-radius: 1rem;
 `;
 
-export const CheckoutContainerStyle = styled.div`
-    background-color: blue;
-    position: sticky;
-    top: 16.8rem;
-    height: 200px;
-    width: 200px;
-    align-self: start;
-`;
-
 export const PoductInfoStyle = styled.div`
     color: #ffffff;
     margin-top: 0.5rem;
@@ -140,4 +131,68 @@ export const NameStyle = styled.div`
 export const PriceStyle = styled.div`
     font-size: 9px;
     font-weight: 500;
+`;
+
+export const CheckoutContainerStyle = styled.div`
+    position: sticky;
+    top: 16.9rem;
+    align-self: start;
+    backdrop-filter: blur(0.3rem);
+`;
+
+export const CheckoutBorderImageStyle = styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+`;
+
+export const CheckoutHeaderStyle = styled.div`
+    padding: 1.8rem;
+`;
+
+export const CheckoutTitle = styled.div`
+    display: flex;
+    gap: 1rem;
+    font-size: 1.6rem;
+`;
+
+export const CheckoutNumberStyle = styled.div`
+    color: #FF84A6;
+`;
+
+export const CheckoutPriceStyle = styled.div`
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+`;
+
+export const CheckoutButton = styled.div`
+    color: #000000;
+    margin-top: 2rem;
+    padding: 0.8rem;
+    border-radius: 5rem;
+    background-color: #ffffff;
+    text-align: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+`;
+
+export const CheckoutFooterStyle = styled.div``;
+
+export const CheckoutPaymentMethods = styled.div`
+display: flex;
+gap: 1rem;
+align-items: baseline;
+justify-content: center;
+margin-top: 1.5rem;
+`;
+
+export const CheckoutMethodImageStyle = styled.img``;
+
+
+export const CheckoutPaymentText = styled.div`
+margin-top: 0.9rem;
+text-align: center;
+font-size: 0.8rem;
 `;
