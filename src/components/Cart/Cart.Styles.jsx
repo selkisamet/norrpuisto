@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ContainerWrapperStyle = styled.div`
     background-color: #2D3545;
+    position: relative;
 `;
 
 export const TopDetailImageStyle = styled.img`
@@ -14,7 +15,7 @@ export const PageHeaderStyle = styled.div`
     position: sticky;
     top: 0;
     padding: 2.5rem 3.3rem;
-    z-index: 1;
+    z-index: 10;
 `;
 
 export const HeaderRowStyle = styled.div`
@@ -123,11 +124,15 @@ export const CardListContainerStyle = styled.div`
 
 export const CardStyle = styled.div`
     border-radius: 1rem;
+    cursor: pointer;
+    position: relative;
 `;
 
 export const ImageContainerStyle = styled.div`
     position: relative;
 `;
+
+export const CardWrapStyle = styled.div``;
 
 export const RemoveIconStyle = styled.div`
     background-color: red;
@@ -144,6 +149,7 @@ export const RemoveIconStyle = styled.div`
     align-items: center;
     justify-content: center;
     color: #000000;
+    z-index: 1;
 
     &:hover{
         color: #ffffff;
