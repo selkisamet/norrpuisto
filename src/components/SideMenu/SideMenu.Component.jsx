@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ContainerWrapperStyle, ImageWrapperStyle, LogoImageStyle, LogoTypeImageStyle, MenuListWrapperStyle, LinkListItemStyle, NumberStyle, IconFlamaImageStyle, SocialMediaWrapperStyle, LinkSocialStyle } from "./SideMenu.Styles";
 import LogoImage from '../../assets/images/darksurface-circle-logo-png.svg';
 import LogoTypeImage from '../../assets/images/light-logotype-svg.svg';
 import IconFlameImage from '../../assets/images/icons/flame.png';
+import { CartContext } from "../../context/Cart.Context";
 
 const SideMenuComponent = () => {
+    const { getTotalItemCount } = useContext(CartContext);
     return (
         <ContainerWrapperStyle>
             <ImageWrapperStyle>
@@ -14,7 +16,7 @@ const SideMenuComponent = () => {
 
             <MenuListWrapperStyle>
                 <LinkListItemStyle to="/home">Home</LinkListItemStyle>
-                <LinkListItemStyle to="/cart">bag <NumberStyle>(7)</NumberStyle></LinkListItemStyle>
+                <LinkListItemStyle to="/cart">bag <NumberStyle>({getTotalItemCount()})</NumberStyle></LinkListItemStyle>
                 <LinkListItemStyle>archive</LinkListItemStyle>
                 <LinkListItemStyle>sizing</LinkListItemStyle>
                 <LinkListItemStyle>contact</LinkListItemStyle>
