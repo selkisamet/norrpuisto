@@ -134,6 +134,40 @@ export const ImageContainerStyle = styled.div`
 
 export const CardWrapStyle = styled.div``;
 
+export const IncreaseDecreaseButtonsStyle = styled.div`
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 1;
+    display: flex;
+    gap: 10px;
+`;
+
+export const IncreaseButtonStyle = styled.div`
+    color: #ffffff;
+    height: 21px;
+    width: 21px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+export const ProductCountStyle = styled.div`
+    color: #000000;
+`;
+
+export const DecreaseButtonStyle = styled.div`
+     color: #ffffff;
+    height: 21px;
+    width: 21px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const RemoveIconStyle = styled.div`
     background-color: red;
     height: 3rem;
