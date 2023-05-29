@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react'
-import { ContainerWrapperStyle, TopDetailImageStyle, PageHeaderStyle, HeaderRowStyle, TitleWrapStyle, TitleStyle, NumberStyle, ExplanationStyle, RemovedWrapStyle, RemovedText, RemovedNubmerStyle, RemovedButton, BodyContainerStyle, CardListContainerStyle, CheckoutContainerStyle, CardStyle, ImageContainerStyle, CardWrapStyle, RemoveIconStyle, ColorBadgeStyle, ColorCircleStyle, ProductImageStyle, PoductInfoStyle, NameStyle, PriceStyle, CheckoutHeaderStyle, CheckoutTitle, CheckoutNumberStyle, CheckoutPriceStyle, CheckoutButton, CheckoutFooterStyle, CheckoutPaymentMethods, CheckoutMethodImageStyle, CheckoutPaymentText } from "./Cart.Styles";
+import { ContainerWrapperStyle, TopDetailImageStyle, PageHeaderStyle, HeaderRowStyle, TitleWrapStyle, TitleStyle, NumberStyle, ExplanationStyle, RemovedWrapStyle, RemovedText, RemovedNubmerStyle, RemovedButton, BodyContainerStyle, CardListContainerStyle, CheckoutContainerStyle, CardStyle, ImageContainerStyle, CardWrapStyle, IncreaseDecreaseButtonsStyle, IncreaseButtonStyle, ProductCountStyle, DecreaseButtonStyle, RemoveIconStyle, ColorBadgeStyle, ColorCircleStyle, ProductImageStyle, PoductInfoStyle, NameStyle, PriceStyle, CheckoutHeaderStyle, CheckoutTitle, CheckoutNumberStyle, CheckoutPriceStyle, CheckoutButton, CheckoutFooterStyle, CheckoutPaymentMethods, CheckoutMethodImageStyle, CheckoutPaymentText } from "./Cart.Styles";
 import TopDetailImage from '../../assets/images/top-detail.svg';
 import VectorImage from '../../assets/images/vector.svg';
 import ShopPayImage from '../../assets/images/shoppay.svg';
@@ -10,19 +10,27 @@ import { CartContext } from "../../context/Cart.Context";
 import styled from "styled-components";
 
 const CartComponent = () => {
-    const { cartItems, removeCart, deletedProducts, unDeleteCart, getTotalItemCount, getTotalPrice } = useContext(CartContext);
+    const { addToCart, cartItems, removeCart, deletedProducts, unDeleteCart, getTotalItemCount, getTotalPrice, cartDelete } = useContext(CartContext);
     const [productList, setProductList] = useState(cartItems);
     const [popupStatus, setPopupStatus] = useState(false);
 
+    console.log(cartItems);
+
+    const handleIncrease = (productItem) => {
+        addToCart(productItem)
+    };
+
+    const handleDecrease = (productItem) => {
+        removeCart(productItem)
+    };
+
     const handleRemove = (productItem) => {
-        removeCart(productItem);
+        cartDelete(productItem);
     };
 
     const handleUnDelete = () => {
         unDeleteCart();
     };
-
-
 
     useEffect(() => {
         setProductList(cartItems);
@@ -61,7 +69,14 @@ const CartComponent = () => {
                         {
                             productList?.map((productItem) => {
                                 return <CardStyle key={productItem.id} >
+                                    <IncreaseDecreaseButtonsStyle>
+                                        <DecreaseButtonStyle onClick={() => handleDecrease(productItem)}>-</DecreaseButtonStyle>
+                                        <ProductCountStyle>{productItem.quantity}</ProductCountStyle>
+                                        <IncreaseButtonStyle onClick={() => handleIncrease(productItem)}>+</IncreaseButtonStyle>
+                                    </IncreaseDecreaseButtonsStyle>
+
                                     <RemoveIconStyle onClick={() => handleRemove(productItem)}>X</RemoveIconStyle>
+
                                     <CardWrapStyle onClick={() => setPopupStatus(true)}>
                                         <ImageContainerStyle>
 

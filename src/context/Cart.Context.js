@@ -46,6 +46,25 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem("deletedProducts", JSON.stringify([...deletedProducts, productItem]));
     };
 
+    const cartDelete = (productItem) => {
+        const updatedItems = cartItems.map((product) =>
+            product.id === productItem.id ? { ...product, quantity: product.quantity - 1 } : product
+        );
+
+        const filteredItems = updatedItems.filter((product) => product.quantity > 0);
+
+        setCartItems(filteredItems);
+
+        const deletedItems = Array(productItem.quantity).fill(productItem);
+        setDeletedProducts((prevDeletedProducts) => [...prevDeletedProducts, ...deletedItems]);
+
+        const remainingItems = cartItems.filter((product) => product.id !== productItem.id);
+        setCartItems(remainingItems);
+
+        localStorage.setItem("cartItems", JSON.stringify(remainingItems));
+        localStorage.setItem("deletedProducts", JSON.stringify([...deletedProducts, ...deletedItems]));
+    }
+
     const unDeleteCart = () => {
         const updatedItems = [...cartItems];
 
@@ -82,6 +101,7 @@ export const CartProvider = ({ children }) => {
         unDeleteCart,
         getTotalItemCount,
         getTotalPrice,
+        cartDelete
     };
 
     return <CartContext.Provider value={cartContextValue}>{children}</CartContext.Provider>;
