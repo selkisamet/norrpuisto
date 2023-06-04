@@ -7,14 +7,15 @@ import GooglePayImage from '../../assets/images/googlepay.svg';
 import PayPalImage from '../../assets/images/paypal.svg';
 import { useState } from "react";
 import { CartContext } from "../../context/Cart.Context";
-import styled from "styled-components";
+import ProductDetailPopup from "../UI/ProductDetailPopup/ProductDetailPopup.UI";
 
 const CartComponent = () => {
     const { addToCart, cartItems, removeCart, deletedProducts, unDeleteCart, getTotalItemCount, getTotalPrice, cartDelete } = useContext(CartContext);
     const [productList, setProductList] = useState(cartItems);
     const [popupStatus, setPopupStatus] = useState(false);
+    const [selectedProductDetail, setSelectedProductDetail] = useState({});
 
-    console.log(cartItems);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleIncrease = (productItem) => {
         addToCart(productItem)
@@ -31,6 +32,29 @@ const CartComponent = () => {
     const handleUnDelete = () => {
         unDeleteCart();
     };
+
+    const handleProductDetail = (productItem) => {
+        setSelectedProductDetail(productItem)
+        setPopupStatus(true);
+    }
+
+    const handleNextProduct = () => {
+        const nextIndex = currentIndex + 1;
+        if (nextIndex < productList.length) {
+            handleProductDetail(productList[nextIndex]);
+            setCurrentIndex(nextIndex);
+        }
+    };
+
+    const handlePreviousProduct = () => {
+        const previousIndex = currentIndex - 1;
+        if (previousIndex >= 0) {
+            handleProductDetail(productList[previousIndex]);
+            setCurrentIndex(previousIndex);
+        }
+    };
+
+
 
     useEffect(() => {
         setProductList(cartItems);
@@ -77,7 +101,7 @@ const CartComponent = () => {
 
                                     <RemoveIconStyle onClick={() => handleRemove(productItem)}>X</RemoveIconStyle>
 
-                                    <CardWrapStyle onClick={() => setPopupStatus(true)}>
+                                    <CardWrapStyle onClick={() => handleProductDetail(productItem)}>
                                         <ImageContainerStyle>
 
                                             <ColorBadgeStyle backgroundMode={productItem.backgroundMode === "dark" ? "dark" : ""}>
@@ -127,51 +151,11 @@ const CartComponent = () => {
 
 
 
-            <ProductDetailOverlayStyle popupShow={popupStatus === true ? "popupShow" : ""}>
-                <ProductDetailPopupStyle popupShow={popupStatus === true ? "popupShow" : ""}>
-                    <ClosePopupStyle onClick={() => setPopupStatus(false)}>X</ClosePopupStyle>
-
-                    <PopupImageContainerStyle>
-                        <PopupImageStyle src={require("../../assets/images/products/pexels-monstera-6311420.png")} />
-                    </PopupImageContainerStyle>
-
-                    <PopupDetailStyle>
-                        <ProductNameStyle>Punahärö Futurista White-Blue</ProductNameStyle>
-
-                        <ProductFeaturesStyle>
-                            <FeatureBadgeStyle>100% Embroidery</FeatureBadgeStyle>
-                            <FeatureBadgeStyle>400gsm fabric</FeatureBadgeStyle>
-                        </ProductFeaturesStyle>
-
-                        <ProductTextStyle>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae sapien quis mi convallis vulputate. Ut eget nisl posuere, viverra sapien id, dictum lectus. Nulla facilisi. Donec in elementum nisi. Integer urna felis, commodo eget tempor sed, viverra eu enim.
-                        </ProductTextStyle>
-
-                        <ProductSizesStyle>
-                            <SizeBadgeStyle>S</SizeBadgeStyle>
-                            <SizeBadgeStyle>M</SizeBadgeStyle>
-                            <SizeBadgeStyle>L</SizeBadgeStyle>
-                        </ProductSizesStyle>
-
-                        <ProductImagesSliderStyle>
-                            Resimler buraya gelecek.
-                        </ProductImagesSliderStyle>
-
-                        <NavigationButtonsStyle>
-                            <PreviousStyle>
-                                <PreviousButtonStyle>Previous</PreviousButtonStyle>
-                                <PreviousTextStyle>black Punahärö Futurista hoodie</PreviousTextStyle>
-                            </PreviousStyle>
-
-                            <NextStyle>
-                                <NextButtonStyle>Next</NextButtonStyle>
-                                <NextTextStyle>black Punahärö Futurista hoodie</NextTextStyle>
-                            </NextStyle>
-                        </NavigationButtonsStyle>
-
-                    </PopupDetailStyle>
-                </ProductDetailPopupStyle>
-            </ProductDetailOverlayStyle>
+            <ProductDetailPopup popupStatus={popupStatus}
+                setPopupStatus={setPopupStatus}
+                selectedProductDetail={selectedProductDetail}
+                handleNextProduct={handleNextProduct}
+                handlePreviousProduct={handlePreviousProduct} />
 
 
         </Fragment >
@@ -179,96 +163,3 @@ const CartComponent = () => {
 }
 
 export default CartComponent;
-
-const ProductDetailOverlayStyle = styled.div`
-    position: fixed;
-    background: linear-gradient(0deg, rgba(8, 38, 97, 0.5), rgba(8, 38, 97, 0.5)), radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100%;
-    z-index: 10;
-    backdrop-filter: blur(10px);
-    opacity: ${(props) => props.popupShow ? "1" : "0"};
-    visibility: ${(props) => props.popupShow ? "visible" : "hidden"};
-    transition: all 0.2s ease;
-`;
-
-const ProductDetailPopupStyle = styled.div`
-    background-color: #161F31;
-    height: 60rem;
-    max-width: 97.6rem;
-    width: 100%;
-    border-radius: 3rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: relative;
-    display: flex;
-    padding: 3.6rem;
-`;
-
-const PopupImageContainerStyle = styled.div``;
-
-const PopupImageStyle = styled.img`
-    height: 100%;
-    width: 100%;
-    object-fit: contain ;
-    border-radius: 2rem;
-`;
-
-const PopupDetailStyle = styled.div`
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
-`;
-
-const ProductNameStyle = styled.div``;
-
-const ProductFeaturesStyle = styled.div``;
-
-const FeatureBadgeStyle = styled.div``;
-
-const ProductTextStyle = styled.div``;
-
-const SizeBadgeStyle = styled.div``;
-
-const ProductImagesSliderStyle = styled.div``;
-
-const ProductSizesStyle = styled.div``;
-
-const NavigationButtonsStyle = styled.div``;
-
-const PreviousStyle = styled.div``;
-
-const PreviousButtonStyle = styled.div``;
-
-const PreviousTextStyle = styled.div``;
-
-const NextStyle = styled.div``;
-
-const NextButtonStyle = styled.div``;
-
-const NextTextStyle = styled.div``;
-
-const ClosePopupStyle = styled.div`
-    color: #ffffff;
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    height: 3.5rem;
-    width: 3.5rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    
-    &:hover{
-        background-color: #454C5A;
-    }
-`;
